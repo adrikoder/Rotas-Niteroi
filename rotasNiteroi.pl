@@ -667,3 +667,5 @@ bfs([[NoAtual | CaminhoParcial] | OutrosCaminhos], Objetivo, Caminho, Visitados)
     %busca continua com a fila de caminhos atualizada, incluindo o nó atual na lista de visitados p/ evitar loops
     bfs(CaminhosAtualizados, Objetivo, Caminho, [NoAtual | Visitados]).
 
+    %BUSQUEDA EM PROFUNDIDAD
+
