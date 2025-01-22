@@ -591,7 +591,7 @@ objetivo(c119).
 %Retorna a solucao quando atinge o nó objetivo, no nosso caso, c119
 branchAndBound([[G,No|Caminho]|_],[G,Solucao]):-
     objetivo(No),
-    reverse([No|Caminho], Solucao), !.
+    reverse([No|Caminho], Solucao), write(Solucao),!.
 
 branchAndBound([Caminho| Caminhos], Solucao):-
     estendebranchAndBound(Caminho, NovosCaminhos),
@@ -667,5 +667,13 @@ bfs([[NoAtual | CaminhoParcial] | OutrosCaminhos], Objetivo, Caminho, Visitados)
     %busca continua com a fila de caminhos atualizada, incluindo o nó atual na lista de visitados p/ evitar loops
     bfs(CaminhosAtualizados, Objetivo, Caminho, [NoAtual | Visitados]).
 
-    %BUSQUEDA EM PROFUNDIDAD
 
+%BUSCA EM PROFUNDIDADE
+% Caso base: se o ponto de partida é o destino, o caminho é apenas o ponto inicial
+dfs(Inicio, Inicio, [Inicio]).
+
+% Caso recursivo: explora conexões para buscar um caminho até o destino
+dfs(Inicio, Destino, [Inicio | Caminho]) :-
+    conexao(Inicio, Proximo, _),
+    \+ member(Proximo, [Inicio]),  % Evita ciclos visitando apenas nós não visitados
+    dfs(Proximo, Destino, Caminho).
